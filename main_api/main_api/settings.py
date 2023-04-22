@@ -120,15 +120,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
+    # https://www.django-rest-framework.org/api-guide/permissions/#api-reference
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.IsAuthenticated'
     ],
-    # from "Setting the authentication scheme" at https://www.django-rest-framework.org/api-guide/authentication/
+    # https://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication
+    # also make sure 'rest_framework.authtoken' is listed in INSTALLED APPS list above
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ],
 }
 
