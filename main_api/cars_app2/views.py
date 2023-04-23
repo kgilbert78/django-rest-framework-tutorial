@@ -12,8 +12,14 @@ class Cars2APIView(APIView):
         return cars2
     
     def get(self, request, *args, **kwargs):
-        cars2 = self.get_queryset()
-        serializer = Cars2Serializer(cars2, many=True)
+        try:
+            req_id = request.query_params['id']
+            # print("id:", req_id)
+            car2 = Cars2.objects.get(id=req_id)
+            serializer = Cars2Serializer(car2)
+        except:
+            cars2 = self.get_queryset()
+            serializer = Cars2Serializer(cars2, many=True)
         return Response(serializer.data)
     
     # nearly identical to create function override in cars-app CarViewSet. with APIView you won't be able to post data without adding this manually though.
