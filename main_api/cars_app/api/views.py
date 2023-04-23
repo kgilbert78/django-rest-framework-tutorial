@@ -52,22 +52,22 @@ class CarViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data)
 
-    # # without this, the default behavior of delete does not return any data showing that the car with the id you specified in the url has been deleted.
-    # def destroy(self, request, *args, **kwargs):
+    # without this, the default behavior of delete does not return any data showing that the car with the id you specified in the url has been deleted.
+    def destroy(self, request, *args, **kwargs):
 
-    #     logged_in_user = request.user
-    #     # print(logged_in_user, type(logged_in_user)) # admin <class 'django.contrib.auth.models.User'>
-    #     if str(logged_in_user) == "admin":
-    #         car = self.get_object()
-    #         car.delete()
+        logged_in_user = request.user
+        # print(logged_in_user, type(logged_in_user)) # admin <class 'django.contrib.auth.models.User'>
+        if str(logged_in_user) == "admin":
+            car = self.get_object()
+            car.delete()
 
-    #         brand = request.data['car_brand']
-    #         model = request.data['car_model']
-    #         year = request.data['car_year']
-    #         color = request.data['car_color']
+            brand = request.data['car_brand']
+            model = request.data['car_model']
+            year = request.data['car_year']
+            color = request.data['car_color']
 
-    #         response_message = {"message": f"{color} {year} {brand} {model} has been deleted"}
-    #     else:
-    #         response_message = {"message": "You do not have authorization to delete this."}
+            response_message = {"message": f"{color} {year} {brand} {model} has been deleted"}
+        else:
+            response_message = {"message": "You do not have authorization to delete this."}
 
-    #     return Response(response_message)
+        return Response(response_message)
