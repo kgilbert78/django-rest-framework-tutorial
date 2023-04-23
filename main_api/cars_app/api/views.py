@@ -1,6 +1,9 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 # from rest_framework.permissions import IsAuthenticated
+from rest_framework import viewsets
+from .serializer import CarSerializer
+from ..models import Car
 
 @api_view()
 # @permission_classes([IsAuthenticated])
@@ -16,3 +19,10 @@ def drive(request):
         if 'id' in params:
             id = int(request.query_params['id']) # convert from string for calculations
     return Response({"message": "vroom!", "id": id, "doubled-id": id*2})
+
+class CarViewSet(viewsets.ModelViewSet):
+    serializer_class = CarSerializer
+
+    def get_queryset(self):
+        car = Car.objects.all()
+        return car
