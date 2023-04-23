@@ -3,7 +3,7 @@ from rest_framework.response import Response
 # from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from .serializer import CarSerializer
-from ..models import Car
+from ..models import Car, Owner, ServicePlan
 
 @api_view()
 # @permission_classes([IsAuthenticated])
@@ -39,18 +39,18 @@ class CarViewSet(viewsets.ModelViewSet):
         serializer = CarSerializer(selected_cars, many=True)
         return Response(serializer.data)
     
-    # def create(self, request, *args, **kwargs):
-    #     data = request.data
-    #     new_car = Car.objects.create(car_brand=data["car_brand"], car_model=data["car_model"], car_year=data["car_year"], car_color=data["car_color"])
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        new_car = Car.objects.create(owner=Owner.objects.get(id=data["owner"]), service_plan=ServicePlan.objects.get(id=data["service_plan"]), car_brand=data["car_brand"], car_model=data["car_model"], car_year=data["car_year"], car_color=data["car_color"])
 
-    #     # implement checks here before saving data
-    #     # (check brand spellings, verify that years are numbers and within certain range, etc.)
+        # implement checks here before saving data
+        # (check brand spellings, verify that years are numbers and within certain range, etc.)
 
-    #     new_car.save()
+        new_car.save()
 
-    #     serializer = CarSerializer(new_car)
+        serializer = CarSerializer(new_car)
 
-    #     return Response(serializer.data)
+        return Response(serializer.data)
 
     # # without this, the default behavior of delete does not return any data showing that the car with the id you specified in the url has been deleted.
     # def destroy(self, request, *args, **kwargs):
