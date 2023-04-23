@@ -38,3 +38,16 @@ class CarViewSet(viewsets.ModelViewSet):
         )
         serializer = CarSerializer(selected_cars, many=True)
         return Response(serializer.data)
+    
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        new_car = Car.objects.create(car_brand=data["car_brand"], car_model=data["car_model"], car_year=data["car_year"], car_color=data["car_color"])
+
+        # implement checks here before saving data
+        # (check brand spellings, verify that years are numbers and within certain range, etc.)
+
+        new_car.save()
+
+        serializer = CarSerializer(new_car)
+
+        return Response(serializer.data)
