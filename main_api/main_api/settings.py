@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
-    'cars_app'
+    'cars_app',
+    'cars_app2'
 ]
 # replaced django-rest-auth from tutorial with updated version dj-rest-auth that works with django 4. see https://dj-rest-auth.readthedocs.io/en/latest/installation.html 
 
