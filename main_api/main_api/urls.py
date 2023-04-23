@@ -27,4 +27,5 @@ urlpatterns = [
     path('cars-app/', include('cars_app.api.urls')),
     path('cars-app2/', include('cars_app2.urls')), 
     # include means put urls listed in cars-app2 urls.py after this 'cars-app2/'
+    path('blog/', include('blog.urls')),
 ]
