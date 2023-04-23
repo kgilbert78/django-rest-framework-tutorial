@@ -39,35 +39,35 @@ class CarViewSet(viewsets.ModelViewSet):
         serializer = CarSerializer(selected_cars, many=True)
         return Response(serializer.data)
     
-    def create(self, request, *args, **kwargs):
-        data = request.data
-        new_car = Car.objects.create(car_brand=data["car_brand"], car_model=data["car_model"], car_year=data["car_year"], car_color=data["car_color"])
+    # def create(self, request, *args, **kwargs):
+    #     data = request.data
+    #     new_car = Car.objects.create(car_brand=data["car_brand"], car_model=data["car_model"], car_year=data["car_year"], car_color=data["car_color"])
 
-        # implement checks here before saving data
-        # (check brand spellings, verify that years are numbers and within certain range, etc.)
+    #     # implement checks here before saving data
+    #     # (check brand spellings, verify that years are numbers and within certain range, etc.)
 
-        new_car.save()
+    #     new_car.save()
 
-        serializer = CarSerializer(new_car)
+    #     serializer = CarSerializer(new_car)
 
-        return Response(serializer.data)
+    #     return Response(serializer.data)
 
-    # without this, the default behavior of delete does not return any data showing that the car with the id you specified in the url has been deleted.
-    def destroy(self, request, *args, **kwargs):
+    # # without this, the default behavior of delete does not return any data showing that the car with the id you specified in the url has been deleted.
+    # def destroy(self, request, *args, **kwargs):
 
-        logged_in_user = request.user
-        # print(logged_in_user, type(logged_in_user)) # admin <class 'django.contrib.auth.models.User'>
-        if str(logged_in_user) == "admin":
-            car = self.get_object()
-            car.delete()
+    #     logged_in_user = request.user
+    #     # print(logged_in_user, type(logged_in_user)) # admin <class 'django.contrib.auth.models.User'>
+    #     if str(logged_in_user) == "admin":
+    #         car = self.get_object()
+    #         car.delete()
 
-            brand = request.data['car_brand']
-            model = request.data['car_model']
-            year = request.data['car_year']
-            color = request.data['car_color']
+    #         brand = request.data['car_brand']
+    #         model = request.data['car_model']
+    #         year = request.data['car_year']
+    #         color = request.data['car_color']
 
-            response_message = {"message": f"{color} {year} {brand} {model} has been deleted"}
-        else:
-            response_message = {"message": "You do not have authorization to delete this."}
+    #         response_message = {"message": f"{color} {year} {brand} {model} has been deleted"}
+    #     else:
+    #         response_message = {"message": "You do not have authorization to delete this."}
 
-        return Response(response_message)
+    #     return Response(response_message)
