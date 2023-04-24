@@ -4,7 +4,23 @@ This repo is intended to refresh and expand my Django knowledge, and to provide 
 
 The tutorial I am following is [a YouTube playlist by Code Environment](https://www.youtube.com/playlist?list=PLmDLs7JbXWNjr5vyJhfGu69sowgIUl8z5) with [this accompanying GitHub repo](https://github.com/CodeEnvironment/django-rest-framework-code)
 
-To install this project `pip install -r requirements.txt`
+## To install this project:
+
+(with empty databases)
+
+1. clone it: `git clone https://github.com/kgilbert78/django-rest-framework-tutorial.git`
+
+2. `cd django-rest-framework-tutorial`
+
+3. [create a virtualenv, activate it](https://www.youtube.com/watch?v=N5vscPTWKOk), and `pip install -r requirements.txt`
+
+4. [generate a secret key](https://www.educative.io/answers/how-to-generate-a-django-secretkey) using `python3 -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'` and copy it to the clipboard
+
+5. `cd main_api/main_api/` (directory which contains `settings.py`), create a file called `.env` and put in it `SECRET_KEY = ''` with the newly generated secret key pasted in between the quotes
+
+6. `cd ..` to the same level as `manage.py`, and `python manage.py migrate`
+
+7. from that same directory `python manage.py runserver`
 
 ## Resources
 
@@ -21,7 +37,6 @@ To install this project `pip install -r requirements.txt`
 - `python manage.py shell`
 
 - `python manage.py startapp <app-name>` to create a new app within the larger project
-
 
 ### Initial Setup for new empty Django project
 
@@ -43,10 +58,10 @@ To install this project `pip install -r requirements.txt`
 
 9. **BEFORE PUSHING TO GITHUB, hide the secret key:**
 
-    - create a file called `.env` in same directory as `manage.py`, and put in it `SECRET_KEY = 'copy-the-key-from-line-23-of-your-settings.py-and-paste-it-here'`
+   - create a file called `.env` in same directory as `manage.py`, and put in it `SECRET_KEY = 'copy-the-key-from-line-23-of-your-settings.py-and-paste-it-here'`
 
-    - in terminal (with virtualenv activated): `pip install python-decouple`
+   - in terminal (with virtualenv activated): `pip install python-decouple`
 
-    - in `settings.py` add the following import: `from decouple import config` and replace line 23 with `SECRET_KEY = config("SECRET_KEY")`
+   - in `settings.py` add the following import: `from decouple import config` and replace line 23 with `SECRET_KEY = config("SECRET_KEY")`
 
-    - make sure `.env` is included in your `.gitignore` file
+   - make sure `.env` is included in your `.gitignore` file
