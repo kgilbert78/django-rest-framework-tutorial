@@ -16,6 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 from .views import Index
 
 urlpatterns = [
@@ -24,8 +28,27 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('cars-app/', include('cars_app.api.urls')),
     path('cars-app2/', include('cars_app2.urls')), 
     # include means put urls listed in cars-app2 urls.py after this 'cars-app2/'
     path('blog/', include('blog.urls')),
 ]
+
+# POST request to api/token/ with body:
+# {
+#     "username": "",
+#     "password": ""
+# }
+# returns json with "refresh" and "access"
+#
+# GET request to blog/posts/ with:
+# Headers:
+# Authorization: Bearer access-token-here
+# Body:
+# {
+#     "username": "",
+#     "password": "",
+#     "refresh": ""
+# }

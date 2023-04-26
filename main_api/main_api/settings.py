@@ -124,12 +124,12 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     # https://www.django-rest-framework.org/api-guide/permissions/#api-reference
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ],
     # https://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication
     # also make sure 'rest_framework.authtoken' is listed in INSTALLED APPS list above
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
 

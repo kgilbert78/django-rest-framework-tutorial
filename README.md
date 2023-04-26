@@ -28,6 +28,8 @@ The tutorial I am following is [a YouTube playlist by Code Environment](https://
 
 [dj-rest-auth docs](https://dj-rest-auth.readthedocs.io/en/latest/index.html), which is an update of the django rest-auth library used in the video series
 
+[Simple JWT docs](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html)
+
 ### Commands Reference
 
 - `python manage.py runserver`
