@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'cars_app',
     'cars_app2',
-    'blog'
+    'blog',
+    'user_app'
 ]
 # replaced django-rest-auth from tutorial with updated version dj-rest-auth that works with django 4. see https://dj-rest-auth.readthedocs.io/en/latest/installation.html 
 
@@ -98,7 +99,7 @@ WSGI_APPLICATION = 'main_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'tutorial_db.sqlite3',
     }
 }
 
@@ -131,6 +132,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    'USER_DETAILS_SERIALIZER': 'user_app.serializer.UserDetailsSerializer',
 }
 
 # Internationalization
@@ -154,3 +156,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'user_app.User'
+ACCOUNT_EMAIL_REQUIRED = False
