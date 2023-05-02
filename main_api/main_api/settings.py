@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     'cars_app',
     'cars_app2',
     'blog',
-    'user_app'
+    'user_app',
+    'school'
 ]
 # replaced django-rest-auth from tutorial with updated version dj-rest-auth that works with django 4. see https://dj-rest-auth.readthedocs.io/en/latest/installation.html 
 
