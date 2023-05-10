@@ -32,3 +32,25 @@ class Cars2APIView(APIView):
         serializer = Cars2Serializer(new_car)
 
         return Response(serializer.data)
+    
+
+    def put(self, request, *args, **kwargs):
+        id = request.query_params["id"]
+        car_obj = Cars2.objects.get(id=id)
+        # ^ make request to http://localhost:8000/cars-app2/?id=2 and don't include an id in the json
+        # video makes requests to cars-app2/2/ instead of cars-app2/?id=2 - that didn't work on mine even after adding path for '<int:id>' to urlpatterns
+
+        data = request.data
+
+        # car_obj = Cars2.objects.get(id=data['id'])
+        # ^ alt method i tried: make request to http://localhost:8000/cars-app2/ and put the id in the json
+
+        car_obj.car_brand = data['car_brand']
+        car_obj.car_model = data['car_model']
+        car_obj.car_year = data['car_year']
+        car_obj.car_color = data['car_color']
+
+        car_obj.save()
+        serializer = Cars2Serializer(car_obj)
+        return Response(serializer.data)
+    
