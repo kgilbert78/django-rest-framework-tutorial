@@ -93,11 +93,11 @@ class CarViewSet(viewsets.ModelViewSet):
         data = request.data
         # print("data:", data)
 
-        # following tutorial - would be better to get by id though
-        service_plan = ServicePlan.objects.get(plan_name=data["service_plan"])
+        # type id's for service_plan & owner in values for "service_plan" & "owner" in request json - frontend would look the plan or person up by name to get id
+        service_plan = ServicePlan.objects.get(id=data["service_plan"])
         car_obj.service_plan = service_plan
 
-        owner = Owner.objects.get(last_name=data["owner"])
+        owner = Owner.objects.get(id=data["owner"])
         car_obj.owner = owner
 
         car_obj.car_brand = data['car_brand']
