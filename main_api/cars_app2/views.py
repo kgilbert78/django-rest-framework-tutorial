@@ -54,3 +54,27 @@ class Cars2APIView(APIView):
         serializer = Cars2Serializer(car_obj)
         return Response(serializer.data)
     
+class Cars2DetailView(APIView):
+    def get(self, request, *args, **kwargs):
+        # print("kwargs:", kwargs, type(kwargs["id"]))
+        try:
+            selected_car = Cars2.objects.get(id=kwargs["id"])
+            serializer = Cars2Serializer(selected_car)
+            return Response(serializer.data)
+        except Cars2.DoesNotExist:
+            return Response("Error: There is no car with that id.")
+    
+    def patch(self, request, *args, **kwargs):
+        car_obj = Cars2.objects.get(id=kwargs["id"])
+        data = request.data
+
+        # check request data for field, if present update it, not present keep existing field data
+        car_obj.car_brand = data.get('car_brand', car_obj.car_brand)
+        car_obj.car_model = data.get('car_model', car_obj.car_model)
+        car_obj.car_year = data.get('car_year', car_obj.car_year)
+        car_obj.car_color = data.get('car_color', car_obj.car_color)
+
+        car_obj.save()
+        serializer = Cars2Serializer(car_obj)
+
+        return Response(serializer.data)
