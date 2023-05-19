@@ -30,12 +30,17 @@ class CarViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         params = kwargs
         # print(params) # url .../car-data/Ford/ prints {'pk': 'Ford'}
-        param_list = params['pk'].split('-')
-        print(param_list) # ['Ford', 'Focus']
-        selected_cars = Car.objects.filter(
-            car_brand=param_list[0],
-            car_model=param_list[1]
-        )
+        if '-' in params['pk']:
+            param_list = params['pk'].split('-')
+            # prisnt(param_list) # ['Ford', 'Focus']
+            selected_cars = Car.objects.filter(
+                car_brand=param_list[0],
+                car_model=param_list[1]
+            )
+        else:
+            selected_cars = Car.objects.filter(
+                car_brand=params['pk']
+            )
         serializer = CarSerializer(selected_cars, many=True)
         return Response(serializer.data)
     

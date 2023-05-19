@@ -67,3 +67,17 @@ The tutorial I am following is [a YouTube playlist by Code Environment](https://
    - in `settings.py` add the following import: `from decouple import config` and replace line 23 with `SECRET_KEY = config("SECRET_KEY")`
 
    - make sure `.env` is included in your `.gitignore` file
+
+### Endpoint Guide
+
+Sample for filtering cars in `cars-app` by __brand__:
+
+- GET request to `http://localhost:8000/cars-app/car-data/Ford`
+
+Sample for filtering cars in `cars-app` by __brand and model__:
+
+- GET request to `http://localhost:8000/cars-app/car-data/Ford-Focus`
+
+Sample for viewing cars in `cars-app2` by __id__:
+
+- GET request to `http://localhost:8000/cars-app2/?id=1`
