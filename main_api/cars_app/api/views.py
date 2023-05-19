@@ -86,3 +86,25 @@ class CarViewSet(viewsets.ModelViewSet):
             response_message = {"message": "You do not have authorization to delete this."}
 
         return Response(response_message)
+    
+    # called update not put because using modelviewset, not api view
+    def update(self, request, *args, **kwargs):
+        car_obj = self.get_object()
+        data = request.data
+        # print("data:", data)
+
+        # following tutorial - would be better to get by id though
+        service_plan = ServicePlan.objects.get(plan_name=data["service_plan"])
+        car_obj.service_plan = service_plan
+
+        owner = Owner.objects.get(last_name=data["owner"])
+        car_obj.owner = owner
+
+        car_obj.car_brand = data['car_brand']
+        car_obj.car_model = data['car_model']
+        car_obj.car_year = data['car_year']
+        car_obj.car_color = data['car_color']
+
+        car_obj.save()
+        serializer = CarSerializer(car_obj)
+        return Response(serializer.data)
