@@ -35,6 +35,7 @@ urlpatterns = [
     # include means put urls listed in cars-app2 urls.py after this 'cars-app2/'
     path('blog/', include('blog.urls')),
     path('school/', include('school.urls')),
+    path('racing/', include('racing.urls')),
 ]
 
 # POST request to api/token/ with body:
