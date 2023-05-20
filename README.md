@@ -78,6 +78,40 @@ Sample for filtering cars in `cars-app` by __brand and model__:
 
 - GET request to `http://localhost:8000/cars-app/car-data/Ford-Focus`
 
-Sample for viewing cars in `cars-app2` by __id__:
+Samples for viewing cars in `cars-app2` by __id__:
 
 - GET request to `http://localhost:8000/cars-app2/?id=1`
+
+- GET request to `http://localhost:8000/cars-app2/1/` 
+
+Sample for viewing cars in `cars-app` by __id__:
+
+- GET request to `http://localhost:8000/cars-app/car-data/1/`
+
+Sample for updating cars in `cars-app`:
+
+- PUT request to `http://localhost:8000/cars-app/car-data/1/` (number at end is id of car to edit)
+
+- JSON should follow this format, referencing owner & service_plan by id:
+  ```
+  {
+      "owner": "1",
+      "service_plan": "3",
+      "car_brand": "Chevrolet",
+      "car_model": "Malibu",
+      "car_year": "2021",
+      "car_color": "red"
+  }
+  ```
+
+Sample for updating cars in `cars-app2` without typing data you're not changing:
+
+- PATCH request to `http://localhost:8000/cars-app2/1/` (number at end is id of car to edit)
+
+- only include the thing to update in the json body: `{"car_color": "blue"}`
+
+Sample for updating cars in `cars-app` without typing data you're not changing:
+
+- PATCH request to `http://localhost:8000/cars-app/car-data/1/` (number at end is id of car to edit)
+
+- only include the thing to update in the json body: `{"service_plan": 2, "car_color": "red"}`

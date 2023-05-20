@@ -108,3 +108,31 @@ class CarViewSet(viewsets.ModelViewSet):
         car_obj.save()
         serializer = CarSerializer(car_obj)
         return Response(serializer.data)
+    
+    def partial_update(self, request, *args, **kwargs):
+        car_obj = self.get_object()
+        data = request.data
+
+        # check request data for field, if present update it, not present keep existing field data
+
+        try:
+            service_plan = ServicePlan.objects.get(id=data["service_plan"])
+            car_obj.service_plan = service_plan
+        except KeyError: # this will occur if field not in request data
+            pass
+
+        try:
+            owner = Owner.objects.get(id=data["owner"])
+            car_obj.owner = owner
+        except KeyError:
+            pass
+
+        car_obj.car_brand = data.get('car_brand', car_obj.car_brand)
+        car_obj.car_model = data.get('car_model', car_obj.car_model)
+        car_obj.car_year = data.get('car_year', car_obj.car_year)
+        car_obj.car_color = data.get('car_color', car_obj.car_color)
+
+        car_obj.save()
+        serializer = CarSerializer(car_obj)
+
+        return Response(serializer.data)
