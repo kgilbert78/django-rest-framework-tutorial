@@ -1,5 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
+from django.core.mail import send_mail
+
 from .models import Post, PostRating
 from .serializer import PostSerializer, PostRatingSerializer
 
@@ -7,6 +9,10 @@ from .serializer import PostSerializer, PostRatingSerializer
 # Create your views here.
 class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
+
+    def send_email(self, message, subject, recipient_list):
+        from_email = "kyle@kylegilbert.dev"
+        send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 
     def get_queryset(self):
         posts = Post.objects.all()
@@ -23,6 +29,8 @@ class PostViewSet(viewsets.ModelViewSet):
         # ...you can assign it to the rating field when you create the Post
         new_post = Post.objects.create(title=data["title"], body=data["body"], ratings=new_rating)
         new_post.save()
+
+        self.send_email("Blog post notification", f"There is a new post called {new_post.title}", ["kyle@kylegilbert.dev"])
 
         serializer = PostSerializer(new_post)
         
