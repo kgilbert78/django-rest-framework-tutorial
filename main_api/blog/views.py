@@ -1,3 +1,7 @@
+from collections.abc import Callable, Iterable, Mapping
+import threading
+from typing import Any
+
 from rest_framework import viewsets
 from rest_framework.response import Response
 from django.core.mail import send_mail
@@ -5,14 +9,20 @@ from django.core.mail import send_mail
 from .models import Post, PostRating
 from .serializer import PostSerializer, PostRatingSerializer
 
+class HandleNotifications(threading.Thread):
+    def __init__(self, message, subject, recipient_list):
+        self.message = message
+        self.subject = subject
+        self.recipient_list = recipient_list
+        threading.Thread.__init__(self)
+
+    def run(self):
+        from_email = "kyle@kylegilbert.dev"
+        send_mail(self.subject, self.message, from_email, self.recipient_list, fail_silently=False)
 
 # Create your views here.
 class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
-
-    def send_email(self, message, subject, recipient_list):
-        from_email = "kyle@kylegilbert.dev"
-        send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 
     def get_queryset(self):
         posts = Post.objects.all()
@@ -30,7 +40,7 @@ class PostViewSet(viewsets.ModelViewSet):
         new_post = Post.objects.create(title=data["title"], body=data["body"], ratings=new_rating)
         new_post.save()
 
-        self.send_email("Blog post notification", f"There is a new post called {new_post.title}", ["kyle@kylegilbert.dev"])
+        HandleNotifications("Blog post notification", f"There is a new post called {new_post.title}", ["kyle@kylegilbert.dev"]).start()
 
         serializer = PostSerializer(new_post)
         
