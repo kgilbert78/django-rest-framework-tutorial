@@ -36,6 +36,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('school/', include('school.urls')),
     path('racing/', include('racing.urls')),
+    path('weather/', include('weather.urls')),
 ]
 
 # POST request to api/token/ with body:
