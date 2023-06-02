@@ -4,3 +4,5 @@ dj-rest-auth
 dj-rest-auth[with_social]
 python-decouple
 djangorestframework-simplejwt
+requests
+APScheduler
