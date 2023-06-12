@@ -6,6 +6,7 @@ from .models import Cars2
 # Create your views here.
 class Cars2APIView(APIView):
     serializer_class = Cars2Serializer
+    throttle_scope = "cars_app2"
 
     def get_queryset(self):
         cars2 = Cars2.objects.all()

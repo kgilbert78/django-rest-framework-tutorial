@@ -22,6 +22,8 @@ def drive(request):
 
 class CarViewSet(viewsets.ModelViewSet):
     serializer_class = CarSerializer
+    throttle_scope = "cars_app"
+
 
     def get_queryset(self):
         car = Car.objects.all()

@@ -137,12 +137,18 @@ REST_FRAMEWORK = {
     ],
     'USER_DETAILS_SERIALIZER': 'user_app.serializer.UserDetailsSerializer',
     'DEFAULT_THROTTLE_CLASSES': [
-        'rest_framework.throttling.AnonRateThrottle',
-        'rest_framework.throttling.UserRateThrottle'
+        'rest_framework.throttling.ScopedRateThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '2/day',
-        'user': '4/day'
+        'cars_app2': '2/day',
+        'cars_app': '4/day'
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/home/kyle/django-rest-framework-tutorial'
     }
 }
 
