@@ -59,7 +59,8 @@ INSTALLED_APPS = [
     'user_app',
     'school',
     'racing',
-    'weather'
+    'weather',
+    'albums'
 ]
 # replaced django-rest-auth from tutorial with updated version dj-rest-auth that works with django 4. see https://dj-rest-auth.readthedocs.io/en/latest/installation.html 
 
