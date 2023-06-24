@@ -9,7 +9,7 @@ class Album(models.Model):
         return self.name
     
 class Track(models.Model):
-    album = models.ForeignKey(Album, related_name='tracks', on_delete=models.CASCADE)
+    album = models.ForeignKey(Album, related_name='track', on_delete=models.CASCADE)
     order = models.IntegerField()
     title = models.CharField(max_length=100)
     duration = models.IntegerField()
