@@ -144,7 +144,11 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         'cars_app2': '2/day',
         'cars_app': '4/day'
-    }
+    },
+    # conditional pagination with addition of limit & offset to end of url like http://localhost:8000/snippets-app/snippets/?limit=2&offset=1/ (need to add pagination_class = LimitOffsetPagination to view also)
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination' 
+    # automatic pagination of all responses in the project to 5
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination', 'PAGE_SIZE': 5 
 }
 
 CACHES = {
