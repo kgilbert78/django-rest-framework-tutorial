@@ -38,7 +38,7 @@ urlpatterns = [
     path('racing/', include('racing.urls')),
     path('weather/', include('weather.urls')),
     path('music/', include('albums.urls')),
-    path('snippets-app/', include('snippets.urls')),
+    path('snippets-app/', include(('snippets.urls', 'Snippets'), namespace='snip')),
 ]
 
 # POST request to api/token/ with body:

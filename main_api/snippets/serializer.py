@@ -7,6 +7,8 @@ class SnippetsDetailSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'code', 'language']
 
 class SnippetsListSerializer(serializers.ModelSerializer):
+    snippet_details = serializers.HyperlinkedIdentityField(view_name='snip:snippet-detail')
+    # view_name = <namespace in main_api urls.py>:<name of detail path in this app's urls.py>
     class Meta:
         model = Snippets
-        fields = ['title']
+        fields = ['title', 'snippet_details']
