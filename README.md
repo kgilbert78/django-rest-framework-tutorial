@@ -96,9 +96,11 @@ Sample for viewing cars in `cars-app` by **id**:
 
 Sample for updating cars in `cars-app`:
 
+- POST request to `http://localhost:8000/cars-app/car-data/`
+
 - PUT request to `http://localhost:8000/cars-app/car-data/1/` (number at end is id of car to edit)
 
-- JSON should follow this format, referencing owner & service_plan by id:
+- JSON for POST and PUT should follow this format, referencing owner & service_plan by id:
   ```
   {
       "owner": "1",
@@ -109,6 +111,8 @@ Sample for updating cars in `cars-app`:
       "car_color": "red"
   }
   ```
+
+(Need to add ability to POST new owners and new service plans through Postman/Insomnia or from frontend app. Currently requires logging into DjRF browser admin system.)
 
 Sample for updating cars in `cars-app2` without typing data you're not changing:
 

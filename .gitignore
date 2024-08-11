@@ -1,6 +1,7 @@
 # Custom
 reference/
 *.djcache
+Django Rest Framework Tutorial
 
 # gitignore template for VSCode: https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
 
