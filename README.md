@@ -12,15 +12,21 @@ The tutorial I am following is [a YouTube playlist by Code Environment](https://
 
 2. `cd django-rest-framework-tutorial`
 
-3. [create a virtualenv, activate it](https://www.youtube.com/watch?v=N5vscPTWKOk), and `pip install -r requirements.txt`
+3. [create a virtualenv with Python 3.9, activate it](https://www.youtube.com/watch?v=N5vscPTWKOk), and `pip install -r requirements.txt`
 
 4. [generate a secret key](https://www.educative.io/answers/how-to-generate-a-django-secretkey) using `python3 -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'` and copy it to the clipboard
 
 5. `cd main_api/main_api/` (directory which contains `settings.py`), create a file called `.env` and put in it `SECRET_KEY = ''` with the newly generated secret key pasted in between the quotes
 
-6. `cd ..` to the same level as `manage.py`, and `python manage.py migrate`
+6. replace my email address with yours in `settings.py` under `EMAIL_HOST_USER` and `DEFAULT_FROM_EMAIL`, and fill in your host and password in the `.env` file as `EMAIL_HOST = ''` and `EMAIL_PWD = ''`
 
-7. from that same directory `python manage.py runserver`
+7. generate an api key for https://openweathermap.org/api and add it to the `.env` file as `WEATHER_API_KEY = ''`
+
+8. paste the following into the `.env` file `CACHE_LOCATION = '/django-rest-framework-tutorial'` and complete the part before the `/` with the full path to this repo on your computer.
+
+9. `cd ..` to the same level as `manage.py`, and `python manage.py migrate`
+
+10. from that same directory `python manage.py runserver`
 
 ## Resources
 
@@ -70,21 +76,21 @@ The tutorial I am following is [a YouTube playlist by Code Environment](https://
 
 ### Endpoint Guide
 
-Sample for filtering cars in `cars-app` by __brand__:
+Sample for filtering cars in `cars-app` by **brand**:
 
 - GET request to `http://localhost:8000/cars-app/car-data/Ford`
 
-Sample for filtering cars in `cars-app` by __brand and model__:
+Sample for filtering cars in `cars-app` by **brand and model**:
 
 - GET request to `http://localhost:8000/cars-app/car-data/Ford-Focus`
 
-Samples for viewing cars in `cars-app2` by __id__:
+Samples for viewing cars in `cars-app2` by **id**:
 
 - GET request to `http://localhost:8000/cars-app2/?id=1`
 
-- GET request to `http://localhost:8000/cars-app2/1/` 
+- GET request to `http://localhost:8000/cars-app2/1/`
 
-Sample for viewing cars in `cars-app` by __id__:
+Sample for viewing cars in `cars-app` by **id**:
 
 - GET request to `http://localhost:8000/cars-app/car-data/1/`
 
